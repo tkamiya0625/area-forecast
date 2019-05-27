@@ -12,9 +12,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "Unlicense",
   "bugs": {
     "url": "https://github.com/hfu/area-forecast-src/issues"
   },
-  "homepage": "https://github.com/hfu/area-forecast-src#readme"
+  "homepage": "https://github.com/hfu/area-forecast-src#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babelify": "^10.0.0"
+  }
 }

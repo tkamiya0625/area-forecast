@@ -1,0 +1,55 @@
+{
+  "center": [
+    139.754,
+    35.746
+  ],
+  "glyphs": "https://vectortiles.xyz/fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "paint": {
+        "background-color": [
+          "rgb",
+          187,
+          222,
+          251
+        ]
+      },
+      "type": "background"
+    },
+    {
+      "id": "area-forecast",
+      "paint": {
+        "fill-color": [
+          "rgb",
+          245,
+          245,
+          245
+        ],
+        "fill-outline-color": [
+          "rgb",
+          92,
+          99,
+          102
+        ]
+      },
+      "source": "v",
+      "source-layer": "area-forecast",
+      "type": "fill"
+    }
+  ],
+  "sources": {
+    "v": {
+      "attribution": "気象庁「全国・地方予報区」を加工して作成",
+      "maxzoom": 10,
+      "minzoom": 2,
+      "tiles": [
+        "https://hfu.github.io/area-forecast/zxy/{z}/{x}/{y}.pbf"
+      ],
+      "type": "vector"
+    }
+  },
+  "sprite": "https://hfu.github.io/unite-sprite/sprite",
+  "version": 8,
+  "zoom": 8.22
+}

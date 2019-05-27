@@ -1,0 +1,55 @@
+{
+  version: 8
+  center: [
+    139.754
+    35.746
+  ]
+  zoom: 8.22
+  sources: {
+    v: {
+      type: vector
+      tiles: [
+        https://hfu.github.io/area-forecast/zxy/{z}/{x}/{y}.pbf
+      ]
+      attribution: 気象庁「全国・地方予報区」を加工して作成
+      minzoom: 2
+      maxzoom: 10
+    }
+  }
+  sprite: https://hfu.github.io/unite-sprite/sprite
+  glyphs: https://vectortiles.xyz/fonts/{fontstack}/{range}.pbf
+  layers: [
+    {
+      id: background
+      type: background
+      paint: {
+        background-color: [
+          rgb
+          187
+          222
+          251
+        ]
+      }
+    }
+    {
+      id: area-forecast
+      type: fill
+      source: v
+      source-layer: area-forecast
+      paint: {
+        fill-color: [
+          rgb
+          245
+          245
+          245
+        ]
+        fill-outline-color: [
+          rgb
+          92
+          99
+          102
+        ]
+      }
+    }
+  ]
+}
