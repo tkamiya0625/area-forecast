@@ -1,0 +1,20 @@
+{
+  "name": "area-forecast-src",
+  "version": "1.0.0",
+  "description": "気象庁「全国・地方予報区」を加工して作成した GeoJSON Text Sequence",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hfu/area-forecast-src.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hfu/area-forecast-src/issues"
+  },
+  "homepage": "https://github.com/hfu/area-forecast-src#readme"
+}
