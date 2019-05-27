@@ -3,7 +3,7 @@ const description = document.getElementById('description')
 
 const map = new mapboxgl.Map({
   container: 'map',
-  maxZoom: 22,
+  maxZoom: 8,
   style: 'style.json',
   attributionControl: true,
   hash: true,

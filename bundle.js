@@ -5,7 +5,7 @@ var overlay = document.getElementById('overlay');
 var description = document.getElementById('description');
 var map = new mapboxgl.Map({
   container: 'map',
-  maxZoom: 22,
+  maxZoom: 8,
   style: 'style.json',
   attributionControl: true,
   hash: true,
