@@ -10,9 +10,9 @@
       "paint": {
         "background-color": [
           "rgb",
-          187,
-          222,
-          251
+          0,
+          0,
+          0
         ]
       },
       "type": "background"
@@ -21,16 +21,18 @@
       "id": "area-forecast",
       "paint": {
         "fill-color": [
-          "rgb",
+          "rgba",
+          0,
           245,
-          245,
-          245
+          0,
+          0.2
         ],
         "fill-outline-color": [
-          "rgb",
-          92,
-          99,
-          102
+          "rgba",
+          255,
+          255,
+          255,
+          0.5
         ]
       },
       "source": "v",
