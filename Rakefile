@@ -15,7 +15,7 @@ task :unzip do
 end
 
 task :tippecanoe do
-  sh "ogr2ogr -f GeoJSONSeq /vsistdout/ a.shp | tippecanoe --force --output-to-directory=zxy --name='area-forecast' --attribution='気象庁「全国・地方予報区」を加工して作成' --layer='area-forecast' --maximum-zoom=10 --minimum-zoom=0"
+  sh "ogr2ogr -f GeoJSONSeq /vsistdout/ a.shp | tippecanoe --force --output-to-directory=zxy --no-tile-compression --name='area-forecast' --attribution='気象庁「全国・地方予報区」を加工して作成' --layer='area-forecast' --maximum-zoom=10 --minimum-zoom=0"
 end
 
 task :budo do
