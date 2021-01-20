@@ -1,33 +1,125 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title></title>
-<link rel="stylesheet" type="text/css" href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css"/>
-<style>
-body { margin: 0; top: 0; bottom: 0; width: 100%; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-.map-overlay { 
-  position: absolute; width: 200px; top: 0px; right: 0px; padding: 10px;
-  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
-.map-overlay .map-overlay-inner { 
-  box-shadow:6px 6px 2px rgba(0, 0, 0, 0.10); color: #000;
-  border-radius: 6px; padding: 10px; margin-bottom: 10px
-}
-.off { visibility: hidden }
-.on { background-color: rgb(0, 255, 255) }
-</style>
-<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
-</head>
-<body>
-<div id="map"></div>
-<div class='map-overlay top'>
-  <div class='map-overlay-inner default' id='overlay'>
-    <p id='description'></p>
-  </div>
-</div>
-<script src="bundle.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>
+      Intro to MapView - Create a 2D map | Sample | ArcGIS API for JavaScript
+      4.18
+    </title>
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+      #info {
+        background-color: black;
+        opacity: 0.75;
+        color: orange;
+        font-size: 12pt;
+        padding: 8px;
+        visibility: hidden;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.18/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.18/"></script>
+
+    <script>
+      require(["esri/Map", "esri/views/MapView", "esri/layers/VectorTileLayer", "esri/widgets/LayerList",], function (Map, MapView, VectorTileLayer, LayerList) {
+        
+        var tileLayer = new VectorTileLayer({
+          title: "aecarea-forst",
+          url: "./style.json",
+          opacity: 0.5
+        });
+        
+        var map = new Map({
+          basemap: "topo-vector",
+          layers: [tileLayer]
+        });
+
+        var view = new MapView({
+          container: "viewDiv",
+          map: map,
+          zoom: 5,
+          center: [139.69167,35.68944] // longitude, latitude
+        });
+
+        view.ui.add("info", "bottom-right");
+
+        view
+          .when()
+          .then(function () {
+            var layerList = new LayerList({
+              view: view
+            });
+            // Add widget to the top right corner of the view
+            view.ui.add(layerList, "top-right");
+            return tileLayer.when();
+          })
+          .then(function (layer) {
+            return view.whenLayerView(layer);
+          })
+          .then(function (layerView) {
+            view.on(["pointer-move", "pointer-down"], eventHandler);
+
+            function eventHandler(event) {
+              // only include graphics from tileLayer in the hitTest
+              const opts = {
+                include: tileLayer
+              };
+              // the hitTest() checks to see if any graphics from the hurricanesLayer
+              // intersect the x, y coordinates of the pointer
+              view.hitTest(event, opts).then(getGraphics);
+            }
+
+            function getGraphics(response) {
+                // the topmost graphic from the hurricanesLayer
+                // and display select attribute values from the
+                // graphic to the user
+                if (response.results.length) {
+                  const graphic = response.results[0].graphic;
+                  const mapPoint = response.results[0].mapPoint;
+
+                  const attributes = graphic.attributes;
+
+                  const layerName = attributes.layerName;
+                  const latitude = mapPoint.latitude;
+                  const longitude = mapPoint.longitude;
+
+                  document.getElementById("info").style.visibility = "visible";
+                  document.getElementById("name").innerHTML = layerName;
+                  document.getElementById("lat").innerHTML =  "緯度： " + latitude;
+                  document.getElementById("lon").innerHTML =  "経度： " + longitude;
+
+              } else {
+                document.getElementById("info").style.visibility = "hidden";
+              }
+            }
+
+          });
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+    <div id="info">
+      <span id="name"></span><br />
+      <span id="lat"></span><br />
+      <span id="lon"></span>
+    </div>
+  </body>
 </html>
